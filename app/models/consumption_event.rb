@@ -19,6 +19,7 @@ class ConsumptionEvent < ApplicationRecord
 
   def refresh_plant_care_status
     return unless care_subject.is_a?(Plant)
+    return if care_subject.destroyed?
     return unless %w[water fertilizer].include?(consumable_item.category)
 
     care_subject.update_care_status!

@@ -37,7 +37,7 @@ module InventoryTrackable
   private
 
   def memo(bucket, key)
-    cache[[bucket, key]] ||= yield
+    cache[[ bucket, key ]] ||= yield
   end
 
   def cache

@@ -48,7 +48,7 @@ class StockLotsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     assert_no_difference("StockLot.count") do
       post consumable_item_stock_lots_path(@consumable),
-        params: { stock_lot: { quantity: nil, purchased_on: nil } }
+        params: { stock_lot: { quantity: -1, unit: "invalid", purchased_on: nil } }
     end
     assert_response :unprocessable_entity
   end
