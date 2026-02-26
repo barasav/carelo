@@ -1,0 +1,46 @@
+<%= form_with model: consumption_rule.persisted? ? consumption_rule : [animal, consumption_rule], html: { class: "styled-form" } do |f| %>
+  <% if consumption_rule.errors.any? %>
+    <div class="form-errors">
+      <h2><%= t("consumption_rules.form.errors_header", count: consumption_rule.errors.count) %></h2>
+      <ul>
+        <% consumption_rule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("consumption_rules.form.section_feeding") %></h3>
+    <div class="form-field">
+      <%= f.label :consumable_item_id, t("consumption_rules.form.consumable_item") %>
+      <%= f.collection_select :consumable_item_id,
+        consumable_items_for_feed_select(animal),
+        :id, :name,
+        { include_blank: t("consumption_rules.form.select_food") } %>
+    </div>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :amount, t("consumption_rules.form.amount") %>
+        <%= f.number_field :amount, min: 0, step: :any, placeholder: "100" %>
+      </div>
+      <div class="form-field">
+        <%= f.label :unit, t("consumption_rules.form.unit") %>
+        <%= f.select :unit, UnitConverter::SUPPORTED_UNITS.map { |u| [u, u] } %>
+      </div>
+    </div>
+    <div class="form-field">
+      <%= f.label :period, t("consumption_rules.form.period") %>
+      <%= f.select :period, ConsumptionRule::PERIODS.map { |p| [t("consumption_rules.period.#{p}"), p] } %>
+    </div>
+    <div class="form-field">
+      <%= f.check_box :active %>
+      <%= f.label :active, t("consumption_rules.form.active") %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to t("common.back"), animal, class: "form-back" %>
+  </div>
+<% end %>

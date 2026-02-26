@@ -1,0 +1,85 @@
+<%= form_with model: @plant, html: { class: "styled-form" } do |f| %>
+  <% if @plant.errors.any? %>
+    <div class="form-errors">
+      <h2><%= t("plants.form.errors_header", count: @plant.errors.count) %></h2>
+      <ul>
+        <% @plant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("plants.form.section_basic") %></h3>
+    <div class="form-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-field">
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+    </div>
+    <div class="form-field">
+      <%= f.label :light %>
+      <%= f.text_field :light %>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("plants.form.section_blooming") %></h3>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :blooming_start_date %>
+        <%= f.date_field :blooming_start_date %>
+      </div>
+      <div class="form-field">
+        <%= f.label :blooming_end_date %>
+        <%= f.date_field :blooming_end_date %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("plants.form.section_watering") %></h3>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :watering_amount %>
+        <%= f.number_field :watering_amount, min: 0, placeholder: "0" %>
+        <span class="form-hint"><%= t("plants.form.ml_unit") %></span>
+      </div>
+      <div class="form-field">
+        <%= f.label :watering_interval_days %>
+        <%= f.number_field :watering_interval_days, min: 1, placeholder: "7" %>
+        <span class="form-hint"><%= t("plants.form.days_unit") %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("plants.form.section_fertilizing") %></h3>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :fertilizer_type %>
+        <%= f.text_field :fertilizer_type %>
+      </div>
+      <div class="form-field">
+        <%= f.label :fertilizer_amount %>
+        <%= f.number_field :fertilizer_amount, min: 0, placeholder: "0" %>
+      </div>
+    </div>
+    <div class="form-field">
+      <%= f.label :fertilizing_interval_days %>
+      <%= f.number_field :fertilizing_interval_days, min: 1, placeholder: "14" %>
+      <span class="form-hint"><%= t("plants.form.days_unit") %></span>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <% if @plant.persisted? %>
+      <%= link_to t("common.show"), plant_path(@plant), class: "form-back" %>
+    <% end %>
+    <%= link_to t("common.back"), plants_path, class: "form-back" %>
+  </div>
+<% end %>

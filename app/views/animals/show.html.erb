@@ -1,0 +1,50 @@
+<% content_for :title, @animal.name %>
+
+<div class="show-header">
+  <h1 class="page-title"><%= @animal.name %></h1>
+  <div class="show-header-actions">
+    <%= link_to t("common.edit"), edit_animal_path(@animal), class: "btn btn-primary" %>
+    <%= button_to t("common.delete"), animal_path(@animal), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("animals.form.section_basic") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Animal.human_attribute_name(:name) %></span>
+    <span class="show-detail-value"><%= @animal.name %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Animal.human_attribute_name(:species) %></span>
+    <span class="show-detail-value"><%= @animal.species.capitalize %></span>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("animals.show.section_feeding") %></h2>
+  <% if @animal.consumption_rules.any? %>
+    <div class="index-list">
+      <% @animal.consumption_rules.each do |rule| %>
+        <div class="index-card">
+          <div>
+            <span class="index-card-title">
+              <%= rule.amount %> <%= rule.unit %> <%= rule.consumable_item.name %>
+            </span>
+            <span class="index-card-meta"><%= t("consumption_rules.period.#{rule.period}") %></span>
+          </div>
+          <div class="index-card-actions">
+            <%= link_to t("common.edit"), edit_consumption_rule_path(rule) %>
+            <%= button_to t("common.delete"), consumption_rule_path(rule), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="show-detail-value-empty"><%= t("animals.show.no_feeding_rules") %></p>
+  <% end %>
+  <%= link_to t("animals.show.add_feeding_rule"), new_animal_consumption_rule_path(@animal), class: "btn btn-primary" %>
+</div>
+
+<div class="show-actions">
+  <%= link_to t("common.back"), animals_path %>
+</div>

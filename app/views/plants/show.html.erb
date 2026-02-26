@@ -1,0 +1,124 @@
+<% content_for :title, @plant.name %>
+
+<div class="show-header">
+  <h1 class="page-title"><%= @plant.name %></h1>
+  <div class="show-header-actions">
+    <%= link_to t("common.edit"), edit_plant_path(@plant), class: "btn btn-primary" %>
+    <%= button_to t("common.delete"), plant_path(@plant), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("plants.form.section_basic") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:name) %></span>
+    <span class="show-detail-value"><%= @plant.name %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:location) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.location.blank? %>">
+      <%= @plant.location.presence || t("common.dash") %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:light) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.light.blank? %>">
+      <%= @plant.light.presence || t("common.dash") %>
+    </span>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("plants.form.section_blooming") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:blooming_start_date) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.blooming_start_date.blank? %>">
+      <%= @plant.blooming_start_date&.strftime("%Y-%m-%d") || t("common.dash") %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:blooming_end_date) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.blooming_end_date.blank? %>">
+      <%= @plant.blooming_end_date&.strftime("%Y-%m-%d") || t("common.dash") %>
+    </span>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("plants.form.section_watering") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:watering_amount) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.watering_amount.blank? %>">
+      <%= @plant.watering_amount.present? ? "#{@plant.watering_amount} #{t('plants.form.ml_unit')}" : t("common.dash") %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:watering_interval_days) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.watering_interval_days.blank? %>">
+      <%= @plant.watering_interval_days.present? ? "#{@plant.watering_interval_days} #{t('plants.form.days_unit')}" : t("common.dash") %>
+    </span>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("plants.form.section_fertilizing") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:fertilizer_type) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.fertilizer_type.blank? %>">
+      <%= @plant.fertilizer_type.presence || t("common.dash") %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:fertilizer_amount) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.fertilizer_amount.blank? %>">
+      <%= @plant.fertilizer_amount.presence || t("common.dash") %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:fertilizing_interval_days) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.fertilizing_interval_days.blank? %>">
+      <%= @plant.fertilizing_interval_days.present? ? "#{@plant.fertilizing_interval_days} #{t('plants.form.days_unit')}" : t("common.dash") %>
+    </span>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("plants.show.care_status") %></h2>
+  <% if @plant.watered_ok.nil? || @plant.fertilized_ok.nil? %>
+    <p class="show-care-status-hint"><%= t("plants.show.care_status_hint") %></p>
+  <% end %>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:watered_ok) %></span>
+    <span class="show-detail-value">
+      <% if @plant.watered_ok.nil? %>
+        <span class="show-badge show-badge-neutral"><%= t("common.dash") %></span>
+      <% elsif @plant.watered_ok? %>
+        <span class="show-badge show-badge-success"><%= t("common.yes") %></span>
+      <% else %>
+        <span class="show-badge show-badge-warning"><%= t("common.no") %></span>
+      <% end %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:fertilized_ok) %></span>
+    <span class="show-detail-value">
+      <% if @plant.fertilized_ok.nil? %>
+        <span class="show-badge show-badge-neutral"><%= t("common.dash") %></span>
+      <% elsif @plant.fertilized_ok? %>
+        <span class="show-badge show-badge-success"><%= t("common.yes") %></span>
+      <% else %>
+        <span class="show-badge show-badge-warning"><%= t("common.no") %></span>
+      <% end %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= Plant.human_attribute_name(:last_checked_at) %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if @plant.last_checked_at.blank? %>">
+      <%= @plant.last_checked_at&.strftime("%Y-%m-%d %H:%M") || t("common.dash") %>
+    </span>
+  </div>
+</div>
+
+<div class="show-actions">
+  <%= link_to t("common.back"), plants_path %>
+</div>

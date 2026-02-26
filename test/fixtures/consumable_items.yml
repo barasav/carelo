@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+water:
+  user: one
+  name: Water
+  category: water
+  default_unit: ml
+
+fertilizer:
+  user: one
+  name: Generic fertilizer
+  category: fertilizer
+  default_unit: g
+
+cat_food:
+  user: one
+  name: Acana cat food
+  category: food
+  default_unit: g
+
+dog_food:
+  user: two
+  name: Royal Canin dog food
+  category: food
+  default_unit: g

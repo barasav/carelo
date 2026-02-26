@@ -1,0 +1,43 @@
+<% content_for :title, t("home.title") %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("home.page_title") %></h1>
+  <div class="page-header-actions">
+    <%= link_to t("home.new_plant"), new_plant_path, class: "btn btn-primary" %>
+    <%= link_to t("home.new_animal"), new_animal_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="home-sections">
+  <section class="home-section">
+    <h2 class="home-section-title"><%= t("home.plants_section") %></h2>
+    <% if @plants.any? %>
+      <div class="index-list">
+        <% @plants.each do |plant| %>
+          <%= render "plants/plant_card", plant: plant %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="index-empty">
+        <p><%= t("home.no_plants") %></p>
+        <%= link_to t("home.add_first_plant"), new_plant_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+
+  <section class="home-section">
+    <h2 class="home-section-title"><%= t("home.animals_section") %></h2>
+    <% if @animals.any? %>
+      <div class="index-list">
+        <% @animals.each do |animal| %>
+          <%= render "animals/animal_card", animal: animal %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="index-empty">
+        <p><%= t("home.no_animals") %></p>
+        <%= link_to t("home.add_first_animal"), new_animal_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+</div>

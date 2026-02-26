@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+watering_one:
+  care_subject: one (Plant)
+  consumable_item: water
+  quantity: 200
+  unit: ml
+  occurred_at: <%= 2.days.ago %>
+  source:
+
+watering_two:
+  care_subject: one (Plant)
+  consumable_item: water
+  quantity: 200
+  unit: ml
+  occurred_at: <%= 1.week.ago %>
+  source: manual
+
+fertilizing_one:
+  care_subject: one (Plant)
+  consumable_item: fertilizer
+  quantity: 5
+  unit: g
+  occurred_at: <%= 3.days.ago %>
+  source:
+
+fertilizing_two:
+  care_subject: two (Plant)
+  consumable_item: fertilizer
+  quantity: 10
+  unit: g
+  occurred_at: <%= 5.days.ago %>
+  source:

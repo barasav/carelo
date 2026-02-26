@@ -1,0 +1,28 @@
+<% content_for :title, t("animals.title") %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("animals.title") %></h1>
+  <%= link_to t("animals.new_animal"), new_animal_path, class: "btn btn-primary" %>
+</div>
+
+<% if @animals.any? %>
+  <div class="index-list">
+    <% @animals.each do |animal| %>
+      <div class="index-card">
+        <div>
+          <%= link_to animal.name, animal, class: "index-card-title" %>
+          <span class="index-card-meta">(<%= animal.species %>)</span>
+        </div>
+        <div class="index-card-actions">
+          <%= link_to t("common.edit"), edit_animal_path(animal) %>
+          <%= button_to t("common.delete"), animal_path(animal), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="index-empty">
+    <p><%= t("animals.no_animals") %></p>
+    <%= link_to t("animals.add_first_animal"), new_animal_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<% content_for :title, t("stock_lots.title") %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("stock_lots.title") %></h1>
+  <%= link_to t("stock_lots.manage_items"), consumable_items_path, class: "btn btn-secondary" %>
+</div>
+
+<% if @stock_lots.any? %>
+  <div class="index-list">
+    <% @stock_lots.each do |stock_lot| %>
+      <div class="index-card">
+        <div>
+          <span class="index-card-title"><%= stock_lot.consumable_item.name %></span>
+          <span class="index-card-meta"><%= stock_lot.quantity %> <%= stock_lot.unit %> · <%= l(stock_lot.purchased_on) %></span>
+        </div>
+        <div class="index-card-actions">
+          <%= link_to t("stock_lots.update_quantity"), edit_stock_lot_path(stock_lot) %>
+          <%= button_to t("common.delete"), stock_lot_path(stock_lot), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="index-empty">
+    <p><%= t("stock_lots.no_stock_lots") %></p>
+    <p><%= t("stock_lots.add_stock_hint") %></p>
+    <%= link_to t("stock_lots.manage_items"), consumable_items_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

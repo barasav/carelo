@@ -1,0 +1,11 @@
+production:
+  plant_care_status:
+    class: PlantCareStatusJob
+    schedule: "0 0 * * *"  # midnight every day (cron: min hour day month weekday)
+  inventory_restock:
+    class: InventoryRestockJob
+    schedule: "0 6 * * *"  # 6am every day
+
+  clear_solid_queue_finished_jobs:
+    command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
+    schedule: every hour at minute 12

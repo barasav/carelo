@@ -1,0 +1,32 @@
+<%= form_with model: @animal, html: { class: "styled-form" } do |f| %>
+  <% if @animal.errors.any? %>
+    <div class="form-errors">
+      <h2><%= t("animals.form.errors_header", count: @animal.errors.count) %></h2>
+      <ul>
+        <% @animal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("animals.form.section_basic") %></h3>
+    <div class="form-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-field">
+      <%= f.label :species %>
+      <%= f.select :species, Animal::SPECIES.map { |s| [s.capitalize, s] }, { include_blank: t("animals.form.select_species") } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <% if @animal.persisted? %>
+      <%= link_to t("common.show"), animal_path(@animal), class: "form-back" %>
+    <% end %>
+    <%= link_to t("common.back"), animals_path, class: "form-back" %>
+  </div>
+<% end %>

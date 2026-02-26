@@ -1,0 +1,27 @@
+<div class="index-card">
+  <div class="index-card-main">
+    <div>
+      <%= link_to animal.name, animal, class: "index-card-title" %>
+      <span class="index-card-meta">(<%= animal.species %>)</span>
+    </div>
+    <% if animal.feeding_has_rules? %>
+      <div class="index-card-status" aria-label="<%= t("home.feeding_status_label") %>: <%= animal.feeding_needs_order ? t("home.feeding_needs_order") : t("home.feeding_ok") %>">
+        <% if animal.feeding_needs_order %>
+          <span class="index-card-status-icon index-card-status-icon-warn" title="<%= t("home.feeding_order_items", items: animal.feeding_item_names) %>">✗</span>
+          <span class="index-card-status-text"><%= animal.feeding_item_names %></span>
+        <% else %>
+          <span class="index-card-status-icon index-card-status-icon-ok" title="<%= t("home.feeding_days_left", count: animal.feeding_days_left) %>">✓</span>
+          <span class="index-card-status-text"><%= t("home.feeding_days_value", count: animal.feeding_days_left) %></span>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="index-card-status">
+        <span class="index-card-status-text index-card-status-text-muted"><%= t("home.feeding_no_rules") %></span>
+      </div>
+    <% end %>
+  </div>
+  <div class="index-card-actions">
+    <%= link_to t("common.edit"), edit_animal_path(animal) %>
+    <%= button_to t("common.delete"), animal_path(animal), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+  </div>
+</div>

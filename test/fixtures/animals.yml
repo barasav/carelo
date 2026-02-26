@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: Mňau
+  species: cat
+
+two:
+  user: one
+  name: Hřebec
+  species: horse
+
+three:
+  user: one
+  name: Pip
+  species: bird

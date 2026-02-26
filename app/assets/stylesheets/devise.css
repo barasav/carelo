@@ -1,0 +1,225 @@
+/*
+ * Devise auth pages – dark mode, plant & animal care theme
+ * Colors: gray, dark brown, green, blue; rounded shapes
+ */
+
+.devise-page {
+  --devise-bg: #1a1614;
+  --devise-card-bg: #252019;
+  --devise-text: #e8e4e0;
+  --devise-text-muted: #9a9188;
+  --devise-brown: #3d3429;
+  --devise-brown-light: #4a4035;
+  --devise-green: #4a9b6d;
+  --devise-green-hover: #5bb37d;
+  --devise-blue: #5b8fc9;
+  --devise-blue-hover: #6ea0dd;
+  --devise-error: #c95a5a;
+  --devise-radius: 1rem;
+  --devise-radius-sm: 0.5rem;
+}
+
+.devise-page {
+  min-height: 100vh;
+  background: var(--devise-bg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--devise-text);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.devise-wrap {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.devise-card {
+  background: var(--devise-card-bg);
+  border-radius: var(--devise-radius);
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.devise-logo {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.devise-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--devise-text);
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+}
+
+.devise-form .field {
+  margin-bottom: 1.25rem;
+}
+
+.devise-form label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--devise-text);
+  margin-bottom: 0.35rem;
+}
+
+.devise-form input[type="email"],
+.devise-form input[type="password"],
+.devise-form input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: var(--devise-brown);
+  border: 1px solid var(--devise-brown-light);
+  border-radius: var(--devise-radius-sm);
+  color: var(--devise-text);
+  box-sizing: border-box;
+}
+
+.devise-form input::placeholder {
+  color: var(--devise-text-muted);
+}
+
+.devise-form input:focus {
+  outline: none;
+  border-color: var(--devise-green);
+  box-shadow: 0 0 0 2px rgba(74, 155, 109, 0.25);
+}
+
+.devise-form .field em {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--devise-text-muted);
+  margin-top: 0.25rem;
+  font-style: normal;
+}
+
+.devise-form .field.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.devise-form .field.checkbox input {
+  width: auto;
+}
+
+.devise-form .actions {
+  margin-top: 1.5rem;
+}
+
+.devise-btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--devise-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.devise-btn-primary {
+  background: var(--devise-green);
+  color: #fff;
+}
+
+.devise-btn-primary:hover {
+  background: var(--devise-green-hover);
+}
+
+.devise-btn-secondary {
+  background: var(--devise-blue);
+  color: #fff;
+}
+
+.devise-btn-secondary:hover {
+  background: var(--devise-blue-hover);
+}
+
+.devise-links {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--devise-brown-light);
+}
+
+.devise-links p {
+  margin: 0.5rem 0;
+}
+
+.devise-links a {
+  color: var(--devise-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.devise-links a:hover {
+  color: var(--devise-blue-hover);
+  text-decoration: underline;
+}
+
+.devise-error {
+  background: rgba(201, 90, 90, 0.15);
+  border: 1px solid var(--devise-error);
+  border-radius: var(--devise-radius-sm);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.devise-error h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--devise-error);
+  margin: 0 0 0.5rem 0;
+}
+
+.devise-error ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--devise-text-muted);
+}
+
+.devise-divider {
+  color: var(--devise-text-muted);
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+
+.devise-edit-actions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--devise-brown-light);
+}
+
+.devise-cancel-section {
+  margin-top: 2rem;
+}
+
+.devise-cancel-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.devise-back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--devise-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.devise-back-link:hover {
+  color: var(--devise-blue-hover);
+}
+
+.devise-cancel-section button.devise-btn {
+  width: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}

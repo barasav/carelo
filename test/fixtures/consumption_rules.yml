@@ -1,0 +1,30 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  care_subject: one (Animal)
+  consumable_item: cat_food
+  amount: 100
+  unit: g
+  period: day
+  active: true
+  kind: feeding
+
+# Second rule for same animal + cat_food (e.g. different pellet type or feeding time)
+two:
+  care_subject: one (Animal)
+  consumable_item: cat_food
+  amount: 50
+  unit: g
+  period: day
+  active: true
+  kind: feeding
+
+# Animal two shares cat_food - lower consumption (50g/day) = more days_left
+three:
+  care_subject: two (Animal)
+  consumable_item: cat_food
+  amount: 50
+  unit: g
+  period: day
+  active: true
+  kind: feeding

@@ -1,0 +1,21 @@
+<div class="devise-card">
+  <div class="devise-logo">✉️</div>
+  <h2 class="devise-title">Resend confirmation instructions</h2>
+
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "devise-form" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: "email@example.com" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Resend confirmation instructions", class: "devise-btn devise-btn-primary" %>
+    </div>
+  <% end %>
+
+  <div class="devise-links">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

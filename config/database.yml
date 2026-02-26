@@ -1,0 +1,86 @@
+# MySQL. Versions 5.7 and 8.0+ are supported.
+#
+# Install the mysql2 driver:
+#   gem install mysql2
+# On macOS with Homebrew:
+#   gem install mysql2
+#   brew install mysql
+#
+# Configure Using Gemfile
+# gem "mysql2"
+#
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  host: localhost
+  port: 3306
+  # reconnect: avoids "Lost connection to MySQL server" (e.g. Solid Queue).
+  # MYSQL_OPT_RECONNECT is deprecated in MySQL 8.0.34+ but no stable alternative yet.
+  reconnect: true
+  read_timeout: 60
+  write_timeout: 60
+
+development:
+  primary:
+    <<: *default
+    database: plantcare_development
+  queue:
+    <<: *default
+    database: plantcare_development_queue
+    migrations_paths: db/queue_migrate
+    reaping_frequency: 10
+    keepalive: 30
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  primary:
+    <<: *default
+    database: plantcare_test
+  queue:
+    <<: *default
+    database: plantcare_test_queue
+    migrations_paths: db/queue_migrate
+    reaping_frequency: 10
+    keepalive: 30
+
+# As with config/credentials.yml, you never want to store sensitive information,
+# like your database password, in your source code. If your source code is
+# ever seen by anyone, they now have access to your database.
+#
+# Instead, provide the password or a full connection URL as an environment
+# variable when you boot the app. For example:
+#
+#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+#
+# If the connection URL is provided in the special DATABASE_URL environment
+# variable, Rails will automatically merge its configuration values on top of
+# the values provided in this file.
+#
+# Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
+# for a full overview of how database connection configuration can be specified.
+#
+production:
+  primary: &primary_production
+    <<: *default
+    database: plantcare_production
+    username: plantcare
+    password: <%= ENV["PLANTCARE_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: plantcare_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: plantcare_production_queue
+    migrations_paths: db/queue_migrate
+    reaping_frequency: 10
+    keepalive: 30
+  cable:
+    <<: *primary_production
+    database: plantcare_production_cable
+    migrations_paths: db/cable_migrate

@@ -1,0 +1,19 @@
+<% content_for :title, t("plants.title") %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("plants.title") %></h1>
+  <%= link_to t("plants.new_plant"), new_plant_path, class: "btn btn-primary" %>
+</div>
+
+<% if @plants.any? %>
+  <div class="index-list">
+    <% @plants.each do |plant| %>
+      <%= render "plants/plant_card", plant: plant %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="index-empty">
+    <p><%= t("plants.no_plants") %></p>
+    <%= link_to t("plants.add_first_plant"), new_plant_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

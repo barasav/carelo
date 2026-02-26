@@ -1,0 +1,29 @@
+<% content_for :title, t("consumable_items.title") %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("consumable_items.title") %></h1>
+  <%= link_to t("consumable_items.new_item"), new_consumable_item_path, class: "btn btn-primary" %>
+</div>
+
+<% if @consumable_items.any? %>
+  <div class="index-list">
+    <% @consumable_items.each do |item| %>
+      <div class="index-card">
+        <div>
+          <%= link_to item.name, item, class: "index-card-title" %>
+          <span class="index-card-meta"><%= item.category %> · <%= item.default_unit %> · <%= t("consumable_items.total_stock", amount: number_with_precision(item.total_stock, strip_insignificant_zeros: true), unit: item.default_unit) %></span>
+        </div>
+        <div class="index-card-actions">
+          <%= link_to t("consumable_items.add_stock"), new_consumable_item_stock_lot_path(item) %>
+          <%= link_to t("common.edit"), edit_consumable_item_path(item) %>
+          <%= button_to t("common.delete"), consumable_item_path(item), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="index-empty">
+    <p><%= t("consumable_items.no_items") %></p>
+    <%= link_to t("consumable_items.add_first"), new_consumable_item_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

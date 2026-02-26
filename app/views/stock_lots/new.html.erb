@@ -1,0 +1,8 @@
+<% content_for :title, t("stock_lots.add_stock_title", name: @consumable_item.name) %>
+
+<div class="page-header">
+  <h1 class="page-title"><%= t("stock_lots.add_stock_title", name: @consumable_item.name) %></h1>
+  <%= link_to t("common.back"), consumable_item_path(@consumable_item), class: "btn btn-secondary" %>
+</div>
+
+<%= render "form", stock_lot: @stock_lot %>

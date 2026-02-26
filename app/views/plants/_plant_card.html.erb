@@ -1,0 +1,13 @@
+<div class="index-card">
+  <div class="index-card-main">
+    <%= link_to plant.name, plant, class: "index-card-title" %>
+    <div class="index-card-status" aria-label="<%= t("plants.index.care_status_label") %>">
+      <span class="index-card-status-icon index-card-status-icon-<%= plant.watered_ok.nil? ? 'unknown' : (plant.watered_ok? ? 'ok' : 'warn') %>" title="<%= t("plants.index.watered_hint", status: plant.watered_ok.nil? ? t("plants.index.status_unknown") : (plant.watered_ok? ? t("plants.index.status_ok") : t("plants.index.status_needs_care"))) %>">💧</span>
+      <span class="index-card-status-icon index-card-status-icon-<%= plant.fertilized_ok.nil? ? 'unknown' : (plant.fertilized_ok? ? 'ok' : 'warn') %>" title="<%= t("plants.index.fertilized_hint", status: plant.fertilized_ok.nil? ? t("plants.index.status_unknown") : (plant.fertilized_ok? ? t("plants.index.status_ok") : t("plants.index.status_needs_care"))) %>">🌿</span>
+    </div>
+  </div>
+  <div class="index-card-actions">
+    <%= link_to t("common.edit"), edit_plant_path(plant) %>
+    <%= button_to t("common.delete"), plant_path(plant), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+  </div>
+</div>

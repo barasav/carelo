@@ -1,0 +1,88 @@
+<% content_for :title, @consumable_item.name %>
+<% user_stock = current_user.stock_lots.where(consumable_item: @consumable_item).order(purchased_on: :desc) %>
+<% total_stock = @consumable_item.total_stock %>
+<% daily_consumption = @consumable_item.total_daily_consumption %>
+<% days_left = @consumable_item.days_left %>
+
+<div class="show-header">
+  <div class="show-header-main">
+    <h1 class="page-title"><%= @consumable_item.name %></h1>
+    <span class="show-badge show-badge-category"><%= t("consumable_items.categories.#{@consumable_item.category}") %></span>
+  </div>
+  <div class="show-header-actions">
+    <%= link_to t("consumable_items.add_stock"), new_consumable_item_stock_lot_path(@consumable_item), class: "btn btn-primary" %>
+    <%= link_to t("common.edit"), edit_consumable_item_path(@consumable_item), class: "btn btn-secondary" %>
+    <%= button_to t("common.delete"), consumable_item_path(@consumable_item), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<div class="show-card">
+  <h2 class="show-card-title"><%= t("consumable_items.form.section_item") %></h2>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= ConsumableItem.human_attribute_name(:name) %></span>
+    <span class="show-detail-value"><%= @consumable_item.name %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= ConsumableItem.human_attribute_name(:category) %></span>
+    <span class="show-detail-value"><%= t("consumable_items.categories.#{@consumable_item.category}") %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= ConsumableItem.human_attribute_name(:default_unit) %></span>
+    <span class="show-detail-value"><%= @consumable_item.default_unit %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= t("consumable_items.total_stock_label") %></span>
+    <span class="show-detail-value"><%= number_with_precision(total_stock, strip_insignificant_zeros: true) %> <%= @consumable_item.default_unit %></span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= t("consumable_items.daily_consumption_label") %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if daily_consumption.zero? %>">
+      <% if daily_consumption.zero? %>
+        <%= t("consumable_items.no_daily_consumption") %>
+      <% else %>
+        <%= number_with_precision(daily_consumption, strip_insignificant_zeros: true) %> <%= @consumable_item.default_unit %>/<%= t("consumable_items.per_day") %>
+      <% end %>
+    </span>
+  </div>
+  <div class="show-detail">
+    <span class="show-detail-label"><%= t("consumable_items.days_left_label") %></span>
+    <span class="show-detail-value <%= 'show-detail-value-empty' if days_left.nil? %>">
+      <% if days_left.nil? %>
+        <%= t("consumable_items.days_left_unknown") %>
+      <% else %>
+        <%= t("consumable_items.days_left_value", count: number_with_precision(days_left, precision: 1, strip_insignificant_zeros: true)) %>
+      <% end %>
+    </span>
+  </div>
+</div>
+
+<% if user_stock.any? %>
+  <div class="show-card">
+    <h2 class="show-card-title"><%= t("consumable_items.section_stock") %></h2>
+    <div class="index-list">
+      <% user_stock.each do |lot| %>
+        <div class="index-card">
+          <div>
+            <span class="index-card-title"><%= lot.quantity %> <%= lot.unit %></span>
+            <span class="index-card-meta"><%= l(lot.purchased_on) %><%= " · #{l(lot.expires_on)}" if lot.expires_on.present? %></span>
+          </div>
+          <div class="index-card-actions">
+            <%= link_to t("stock_lots.update_quantity"), edit_stock_lot_path(lot) %>
+            <%= button_to t("common.delete"), stock_lot_path(lot), method: :delete, data: { turbo_confirm: t("common.confirm_destroy") }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to t("consumable_items.add_stock"), new_consumable_item_stock_lot_path(@consumable_item), class: "btn btn-primary" %>
+  </div>
+<% else %>
+  <div class="show-card show-card-empty">
+    <h2 class="show-card-title"><%= t("consumable_items.section_stock") %></h2>
+    <p class="show-detail-value-empty"><%= t("consumable_items.no_stock") %></p>
+    <%= link_to t("consumable_items.add_stock"), new_consumable_item_stock_lot_path(@consumable_item), class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<div class="show-actions">
+  <%= link_to t("common.back"), consumable_items_path %>
+</div>

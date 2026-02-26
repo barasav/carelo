@@ -1,0 +1,241 @@
+en:
+  app_name: "Plantcare"
+  app_logo: "🌱 Plantcare"
+
+  common:
+    edit: "Edit"
+    delete: "Delete"
+    back: "Back"
+    show: "Show"
+    confirm_destroy: "Are you sure?"
+    yes: "Yes"
+    no: "No"
+    dash: "-"
+
+  layout:
+    home: "Home"
+    plants: "Plants"
+    animals: "Animals"
+    consumable_items: "Items"
+    stock_lots: "Stock"
+    sign_out: "Sign out"
+
+  home:
+    title: "Plantcare"
+    page_title: "My plants & animals"
+    new_plant: "New plant"
+    new_animal: "New animal"
+    plants_section: "🌱 Plants"
+    animals_section: "🐾 Animals"
+    no_plants: "No plants yet."
+    no_animals: "No animals yet."
+    add_first_plant: "Add your first plant"
+    add_first_animal: "Add your first animal"
+    feeding_status_label: "Feeding"
+    feeding_needs_order: "Order needed"
+    feeding_ok: "OK"
+    feeding_order_items: "Order: %{items}"
+    feeding_days_left:
+      one: "1 day left"
+      other: "%{count} days left"
+    feeding_days_value:
+      one: "1 day"
+      other: "%{count} days"
+    feeding_no_rules: "—"
+
+  plants:
+    index:
+      care_status_label: "Plant care status"
+      status_ok: "OK"
+      status_needs_care: "Needs care"
+      status_unknown: "Unknown"
+      watered_hint: "Watered: %{status}"
+      fertilized_hint: "Fertilized: %{status}"
+    title: "Plants"
+    new_plant: "New plant"
+    new_title: "New plant"
+    edit_title: "Edit plant"
+    edit_with_name: "Edit %{name}"
+    no_plants: "No plants yet."
+    add_first_plant: "Add your first plant"
+    show:
+      care_status: "Care status"
+      care_status_hint: "Set watering and fertilizing intervals above to enable status check."
+    form:
+      errors_header:
+        one: "1 error prohibited this plant from being saved:"
+        other: "%{count} errors prohibited this plant from being saved:"
+      section_basic: "Basic info"
+      section_blooming: "Blooming period"
+      section_watering: "Watering"
+      section_fertilizing: "Fertilizing"
+      ml_unit: "ml"
+      days_unit: "days"
+    create:
+      success: "Plant was successfully created."
+    update:
+      success: "Plant was successfully updated."
+    destroy:
+      success: "Plant was successfully deleted."
+
+  animals:
+    title: "Animals"
+    show:
+      section_feeding: "Feeding rules"
+      no_feeding_rules: "No feeding rules yet."
+      add_feeding_rule: "Add feeding rule"
+
+    new_animal: "New animal"
+    new_title: "New animal"
+    edit_title: "Editing animal"
+    edit_with_name: "Edit %{name}"
+    no_animals: "No animals yet."
+    add_first_animal: "Add your first animal"
+    form:
+      errors_header:
+        one: "1 error prohibited this animal from being saved:"
+        other: "%{count} errors prohibited this animal from being saved:"
+      select_species: "Select species"
+      section_basic: "Basic info"
+    create:
+      success: "Animal was successfully created."
+    update:
+      success: "Animal was successfully updated."
+    destroy:
+      success: "Animal was successfully deleted."
+
+  consumable_items:
+    title: "Items"
+    new_item: "New item"
+    new_title: "New item"
+    edit_title: "Edit %{name}"
+    add_stock: "Add stock"
+    no_items: "No items yet."
+    add_first: "Add your first item"
+    section_stock: "Your stock"
+    no_stock: "No stock yet. Add your first batch."
+    total_stock: "Stock: %{amount} %{unit}"
+    total_stock_label: "Total on stock"
+    daily_consumption_label: "Daily consumption"
+    no_daily_consumption: "No feeding rules configured"
+    per_day: "day"
+    days_left_label: "Days left"
+    days_left_unknown: "—"
+    days_left_value: "%{count} days"
+    form:
+      errors_header:
+        one: "1 error prohibited this item from being saved:"
+        other: "%{count} errors prohibited this item from being saved:"
+      section_item: "Item details"
+    categories:
+      food: "Food"
+      fertilizer: "Fertilizer"
+      water: "Water"
+      supplement: "Supplement"
+    create:
+      success: "Item was successfully created."
+    update:
+      success: "Item was successfully updated."
+    destroy:
+      success: "Item was successfully deleted."
+
+  stock_lots:
+    title: "Stock"
+    manage_items: "Manage items"
+    add_stock_title: "Add stock: %{name}"
+    edit_title: "Edit %{name}"
+    update_quantity: "Update quantity"
+    no_stock_lots: "No stock yet."
+    add_stock_hint: "First add items, then add stock from the item detail."
+    form:
+      errors_header:
+        one: "1 error prohibited this stock from being saved:"
+        other: "%{count} errors prohibited this stock from being saved:"
+      section_stock: "Stock details"
+      consumable_item: "Item"
+    create:
+      success: "Stock was successfully added."
+    update:
+      success: "Stock was successfully updated."
+    destroy:
+      success: "Stock was successfully deleted."
+
+  consumption_rules:
+    new_title: "New feeding rule"
+    edit_title: "Edit feeding rule"
+    form:
+      errors_header:
+        one: "1 error prohibited this feeding rule from being saved:"
+        other: "%{count} errors prohibited this feeding rule from being saved:"
+      section_feeding: "Feeding"
+      consumable_item: "Food"
+      select_food: "Select food"
+      amount: "Amount"
+      unit: "Unit"
+      period: "Frequency"
+      active: "Active"
+    period:
+      day: "per day"
+      week: "per week"
+      month: "per month"
+      event: "per event"
+    create:
+      success: "Feeding rule was successfully created."
+    update:
+      success: "Feeding rule was successfully updated."
+    destroy:
+      success: "Feeding rule was successfully deleted."
+
+  activerecord:
+    models:
+      plant: "Plant"
+      animal: "Animal"
+      consumable_item: "Consumable item"
+      stock_lot: "Stock lot"
+      consumption_event: "Consumption event"
+      consumption_rule: "Consumption rule"
+    attributes:
+      consumption_rule:
+        consumable_item_id: "Food"
+        amount: "Amount"
+        unit: "Unit"
+        period: "Frequency"
+        active: "Active"
+      animal:
+        name: "Name"
+        species: "Species"
+      consumable_item:
+        name: "Name"
+        category: "Category"
+        default_unit: "Default unit"
+      stock_lot:
+        consumable_item_id: "Item"
+        quantity: "Quantity"
+        unit: "Unit"
+        purchased_on: "Purchased on"
+        expires_on: "Expires on"
+        notes: "Notes"
+      plant:
+        name: "Name"
+        blooming_start_date: "Blooming start date"
+        blooming_end_date: "Blooming end date"
+        location: "Location"
+        light: "Light"
+        watering_amount: "Watering amount (ml)"
+        fertilizer_type: "Fertilizer type"
+        fertilizer_amount: "Fertilizer amount"
+        watering_interval_days: "Watering interval (days)"
+        fertilizing_interval_days: "Fertilizing interval (days)"
+        watered_ok: "Watering OK"
+        fertilized_ok: "Fertilizing OK"
+        last_checked_at: "Last checked at"
+    errors:
+      models:
+        plant:
+          attributes:
+            blooming_end_date:
+              after_start_date: "must be on or after blooming start date"
+        stock_lot:
+          attributes:
+            expires_on:
+              must_be_after_purchased_on: "must be on or after purchased date"

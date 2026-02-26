@@ -1,0 +1,36 @@
+<%= form_with model: consumable_item, html: { class: "styled-form" } do |f| %>
+  <% if consumable_item.errors.any? %>
+    <div class="form-errors">
+      <h2><%= t("consumable_items.form.errors_header", count: consumable_item.errors.count) %></h2>
+      <ul>
+        <% consumable_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("consumable_items.form.section_item") %></h3>
+    <div class="form-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-field">
+      <%= f.label :category %>
+      <%= f.select :category, ConsumableItem::CATEGORIES.map { |c| [t("consumable_items.categories.#{c}"), c] } %>
+    </div>
+    <div class="form-field">
+      <%= f.label :default_unit %>
+      <%= f.select :default_unit, UnitConverter::SUPPORTED_UNITS.map { |u| [u, u] } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <% if consumable_item.persisted? %>
+      <%= link_to t("common.show"), consumable_item_path(consumable_item), class: "form-back" %>
+    <% end %>
+    <%= link_to t("common.back"), consumable_items_path, class: "form-back" %>
+  </div>
+<% end %>

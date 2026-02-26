@@ -1,0 +1,28 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: Fíkus
+  location: Obývák
+  light: rozptýlené
+  watering_amount: 200
+  fertilizer_type: univerzální
+  fertilizer_amount: 5
+  watering_interval_days: 7
+  fertilizing_interval_days: 30
+  watered_ok: false
+  fertilized_ok: false
+  last_checked_at:
+
+two:
+  user: one
+  name: Monstera
+  location: Ložnice
+  light: polostín
+  fertilizer_type:
+  fertilizer_amount:
+  watering_interval_days: 4
+  fertilizing_interval_days: 15
+  watered_ok: true
+  fertilized_ok: true
+  last_checked_at: <%= 1.day.ago %>

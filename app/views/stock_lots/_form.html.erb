@@ -1,0 +1,49 @@
+<%= form_with model: stock_lot, url: stock_lot.persisted? ? stock_lot_path(stock_lot) : consumable_item_stock_lots_path(stock_lot.consumable_item), html: { class: "styled-form" } do |f| %>
+  <% if stock_lot.errors.any? %>
+    <div class="form-errors">
+      <h2><%= t("stock_lots.form.errors_header", count: stock_lot.errors.count) %></h2>
+      <ul>
+        <% stock_lot.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-card">
+    <h3 class="form-card-title"><%= t("stock_lots.form.section_stock") %></h3>
+    <div class="form-field">
+      <label><%= t("stock_lots.form.consumable_item") %></label>
+      <p class="form-readonly"><%= stock_lot.consumable_item.name %></p>
+    </div>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity, min: 0, step: :any, placeholder: "0" %>
+      </div>
+      <div class="form-field">
+        <%= f.label :unit %>
+        <%= f.select :unit, UnitConverter::SUPPORTED_UNITS.map { |u| [u, u] } %>
+      </div>
+    </div>
+    <div class="form-row form-row-2">
+      <div class="form-field">
+        <%= f.label :purchased_on %>
+        <%= f.date_field :purchased_on %>
+      </div>
+      <div class="form-field">
+        <%= f.label :expires_on %>
+        <%= f.date_field :expires_on %>
+      </div>
+    </div>
+    <div class="form-field">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, rows: 2 %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to t("common.back"), stock_lot.persisted? ? stock_lots_path : consumable_item_path(stock_lot.consumable_item), class: "form-back" %>
+  </div>
+<% end %>
