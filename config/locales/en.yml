@@ -1,6 +1,6 @@
 en:
-  app_name: "Plantcare"
-  app_logo: "🌱 Plantcare"
+  app_name: "Carelo"
+  app_logo: "🌱 Carelo"
 
   common:
     edit: "Edit"
@@ -21,7 +21,7 @@ en:
     sign_out: "Sign out"
 
   home:
-    title: "Plantcare"
+    title: "Carelo"
     page_title: "My plants & animals"
     new_plant: "New plant"
     new_animal: "New animal"

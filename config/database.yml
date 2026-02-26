@@ -26,10 +26,10 @@ default: &default
 development:
   primary:
     <<: *default
-    database: plantcare_development
+    database: carelo_development
   queue:
     <<: *default
-    database: plantcare_development_queue
+    database: carelo_development_queue
     migrations_paths: db/queue_migrate
     reaping_frequency: 10
     keepalive: 30
@@ -40,10 +40,10 @@ development:
 test:
   primary:
     <<: *default
-    database: plantcare_test
+    database: carelo_test
   queue:
     <<: *default
-    database: plantcare_test_queue
+    database: carelo_test_queue
     migrations_paths: db/queue_migrate
     reaping_frequency: 10
     keepalive: 30
@@ -67,20 +67,20 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: plantcare_production
-    username: plantcare
-    password: <%= ENV["PLANTCARE_DATABASE_PASSWORD"] %>
+    database: carelo_production
+    username: carelo
+    password: <%= ENV["CARELO_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: plantcare_production_cache
+    database: carelo_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: plantcare_production_queue
+    database: carelo_production_queue
     migrations_paths: db/queue_migrate
     reaping_frequency: 10
     keepalive: 30
   cable:
     <<: *primary_production
-    database: plantcare_production_cable
+    database: carelo_production_cable
     migrations_paths: db/cable_migrate

@@ -1,10 +1,10 @@
-# Plantcare
+# Carelo
 
 An application for managing plant and animal care – tracking watering, fertilizing, feeding, inventory, and calculating remaining consumable supplies.
 
 ## Purpose
 
-Plantcare helps users track:
+Carelo helps users track:
 - **Plants** – watering and fertilizing schedules, amounts, and care status
 - **Animals** – feeding rules, daily food consumption, and inventory status
 - **Consumable items** (food, fertilizer, water, supplements) – stock levels, lots, and expiry dates
@@ -63,7 +63,7 @@ The app automatically calculates days of supply based on daily consumption and a
 bin/rails test
 ```
 
-MySQL with databases `plantcare_test` and `plantcare_test_queue` is required to run tests.
+MySQL with databases `carelo_test` and `carelo_test_queue` is required to run tests.
 
 ## Features
 
