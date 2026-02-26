@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  host: localhost
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
   port: 3306
   # reconnect: avoids "Lost connection to MySQL server" (e.g. Solid Queue).
   # MYSQL_OPT_RECONNECT is deprecated in MySQL 8.0.34+ but no stable alternative yet.
