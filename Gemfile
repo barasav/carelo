@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+# Security: pin nokogiri and rack to patched versions (bundler-audit)
+gem "nokogiri", ">= 1.19.1"
+gem "rack", ">= 3.2.5"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
